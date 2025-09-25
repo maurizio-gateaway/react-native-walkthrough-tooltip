@@ -56,6 +56,7 @@ const arrowPlacementStyles = ({
   arrowSize,
   placement,
   tooltipOrigin,
+  displayInsets
 }) => {
   // Create the arrow from a rectangle with the appropriate borderXWidth set
   // A rotation is then applied dependending on the placement
@@ -73,7 +74,7 @@ const arrowPlacementStyles = ({
   }
 
   return {
-    left: anchorPoint.x - tooltipOrigin.x - (width / 2 - marginLeft),
+    left: anchorPoint.x - tooltipOrigin.x - (width / 2 - marginLeft) - displayInsets.left,
     top: anchorPoint.y - tooltipOrigin.y - (height / 2 - marginTop),
     width,
     height,
