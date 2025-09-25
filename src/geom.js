@@ -243,7 +243,7 @@ const computeLeftGeometry = ({
   const tooltipOrigin = new Point(
     Math.max(
       displayInsets.left - childContentSpacing,
-      childRect.x - contentSize.width - arrowSize.width - childContentSpacing,
+      childRect.x - contentSize.width - arrowSize.width - childContentSpacing - displayInsets.left,
     ),
     contentSize.height >= maxHeight
       ? displayInsets.top
