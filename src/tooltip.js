@@ -243,9 +243,13 @@ class Tooltip extends Component {
 
   measureContent = e => {
     const { width, height } = e.nativeEvent.layout;
-    const contentSize = new Size(width, height);
-    this.setState({ contentSize }, () => {
-      this.computeGeometry();
+    const newContentSize = new Size(width, height);
+    this.setState(({ contentSize }) => ({
+      contentSize: {
+        width: Math.max(contentSize.width, newContentSize.width),
+        height: Math.max(contentSize.height, newContentSize.height),
+      }}), () => {
+      this.computeGeometry(); 
     });
   };
 
@@ -434,7 +438,7 @@ class Tooltip extends Component {
             <View style={generatedStyles.tooltipStyle}>
               {hasChildren ? <View style={generatedStyles.arrowStyle} /> : null}
               <View
-                onLayout={this.measureContent}
+                onLayout={(e) => {const x=Object.assign({},e); requestAnimationFrame( () => {this.measureContent(x);})}}
                 style={generatedStyles.contentStyle}
               >
                 <TouchableWithoutFeedback
